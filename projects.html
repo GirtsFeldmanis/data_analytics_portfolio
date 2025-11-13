@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Data Analytics Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 40px 20px;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+
+        /* BACK BUTTON */
+        .back-button {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            z-index: 1000;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: white;
+            color: #2c3e50;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: #2c3e50;
+            color: white;
+            transform: translateX(-5px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+
+        .back-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 60px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            font-size: 3.5em;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+            font-weight: 300;
+            letter-spacing: -1px;
+        }
+
+        .intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 60px;
+            color: #666;
+            font-size: 1.05em;
+        }
+
+        .project {
+            margin-bottom: 80px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 60px;
+        }
+
+        .project:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .project-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 35px;
+            gap: 20px;
+            padding: 25px 30px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            border-left: 6px solid #667eea;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .project-header.excel {
+            border-left-color: #217346;
+            background: linear-gradient(135deg, #f0f9f4 0%, #d4edda 100%);
+        }
+
+        .project-header.tableau {
+            border-left-color: #e97627;
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+        }
+
+        .project-type {
+            background: #667eea;
+            color: white;
+            padding: 10px 24px;
+            border-radius: 25px;
+            font-size: 1em;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(102, 126, 234, 0.3);
+            flex-shrink: 0;
+        }
+
+        .project-type.excel {
+            background: #217346;
+            box-shadow: 0 4px 10px rgba(33, 115, 70, 0.3);
+        }
+
+        .project-type.tableau {
+            background: #e97627;
+            box-shadow: 0 4px 10px rgba(233, 118, 39, 0.3);
+        }
+
+        h2 {
+            font-size: 2.2em;
+            color: #1a1a1a;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .project-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .project-description {
+            padding-right: 20px;
+        }
+
+        .project-description p {
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        .key-features {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .key-features h3 {
+            font-size: 0.95em;
+            text-transform: uppercase;
+            color: #667eea;
+            margin-bottom: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .key-features ul {
+            list-style: none;
+        }
+
+        .key-features li {
+            padding-left: 20px;
+            position: relative;
+            margin-bottom: 8px;
+            color: #555;
+            font-size: 0.95em;
+        }
+
+        .key-features li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .project-images {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .image-wrapper {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            display: block;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .image-wrapper:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .image-caption {
+            padding: 12px 15px;
+            background: #fafafa;
+            font-size: 0.85em;
+            color: #666;
+            text-align: center;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .click-hint {
+            display: inline-block;
+            margin-left: 8px;
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        /* Full width variant */
+        .project-content.full-width {
+            grid-template-columns: 1fr;
+        }
+
+        .project-content.full-width .project-images {
+            margin-top: 30px;
+        }
+
+        .project-content.full-width .image-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Stacked variant - Removed, using standard grid for all */
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        @media (max-width: 968px) {
+            .container {
+                padding: 40px 30px;
+            }
+
+            h1 {
+                font-size: 2.5em;
+            }
+
+            .project-content {
+                grid-template-columns: 1fr;
+            }
+
+            .image-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .placeholder-img {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2em;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- BACK BUTTON -->
+    <div class="back-button">
+        <a href="index.html" class="back-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            Back to Home
+        </a>
+    </div>
+
+    <div class="container">
+        <h1>Projects</h1>
+        <p class="intro">
+            I build projects to learn, to test ideas, and to make sense of real-world data. Clear insights, honest data, and visuals that speak for themselves.
+        </p>
+
+        <!-- Excel Project 1: Side by Side Layout -->
+        <div class="project">
+            <div class="project-header excel">
+                <span class="project-type excel">Excel</span>
+                <h2>Workforce Schedule</h2>
+            </div>
+            <div class="project-content">
+                <div class="project-description">
+                    <p>This project demonstrates a complete workforce scheduling system built entirely in Excel. It includes both the raw version and the optimized version — showcasing how structure, formatting, and formulas can transform a plain data sheet into a functional scheduling tool.</p>
+                    
+                    <div class="key-features">
+                        <h3>Key Features</h3>
+                        <ul>
+                            <li>Dynamic employee scheduling with automated calculations</li>
+                            <li>Department-based filtering and sorting</li>
+                            <li>Salary tracking with conditional formatting</li>
+                            <li>Clean, professional dashboard view</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="project-images">
+                    <a href="https://docs.google.com/spreadsheets/d/YOUR_SCHEDULE_FILE_ID/edit" target="_blank" class="image-wrapper">
+                        <img src="images/project-schedule.png" alt="Workforce Schedule Dashboard">
+                        <div class="image-caption">Final optimized scheduling dashboard <span class="click-hint">→ Click to open in Google Sheets</span></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Excel Project 2: Full Width Layout -->
+        <div class="project">
+            <div class="project-header excel">
+                <span class="project-type excel">Excel</span>
+                <h2>Workforce Evaluation Dashboard</h2>
+            </div>
+            <div class="project-content">
+                <div class="project-description">
+                    <p>This dashboard was designed to track employee performance and operational efficiency. It combines individual data, manager feedback, and project-level metrics into one dynamic view.</p>
+                    
+                    <p>By selecting a name from the dropdown, the dashboard updates automatically — showing that employee's photo, evaluation results, efficiency rate, and project details.</p>
+                    
+                    <div class="key-features">
+                        <h3>Technical Highlights</h3>
+                        <ul>
+                            <li>INDEX/MATCH formulas for dynamic data retrieval</li>
+                            <li>Dropdown menus with data validation</li>
+                            <li>Conditional formatting for performance indicators</li>
+                            <li>Integration of images with VLOOKUP references</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="project-images">
+                    <a href="https://docs.google.com/spreadsheets/d/YOUR_EVALUATION_FILE_ID/edit" target="_blank" class="image-wrapper">
+                        <img src="images/project-evaluation.png" alt="Employee Evaluation Dashboard">
+                        <div class="image-caption">Interactive employee evaluation dashboard <span class="click-hint">→ Click to open in Google Sheets</span></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tableau + SQL Project: Stacked with Multiple Images -->
+        <div class="project">
+            <div class="project-header tableau">
+                <span class="project-type tableau">Tableau + SQL</span>
+                <h2>Employee Attrition Analysis</h2>
+            </div>
+            <div class="project-content">
+                <div class="project-description">
+                    <p>End-to-end data analysis project combining SQL for data extraction and transformation with Tableau for interactive visualization. Analyzed employee attrition trends, identifying key drivers and patterns to improve retention strategies.</p>
+                    
+                    <div class="key-features">
+                        <h3>Project Scope</h3>
+                        <ul>
+                            <li>SQL queries to extract and clean HR data from multiple tables</li>
+                            <li>Complex JOIN operations and aggregations for attrition analysis</li>
+                            <li>Interactive Tableau dashboards with filters and parameters</li>
+                            <li>Departmental comparison and trend analysis</li>
+                            <li>Identification of key attrition risk factors</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="project-images">
+                    <a href="https://public.tableau.com/views/YOUR_TABLEAU_WORKBOOK" target="_blank" class="image-wrapper">
+                        <img src="images/project-attrition-1.png" alt="Attrition Dashboard Overview">
+                        <div class="image-caption">Attrition overview dashboard <span class="click-hint">→ Click to view interactive Tableau dashboard</span></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Simple Dashboard: Classic Side by Side -->
+        <div class="project">
+            <div class="project-header excel">
+                <span class="project-type excel">Excel</span>
+                <h2>Simple Excel Dashboard</h2>
+            </div>
+            <div class="project-content">
+                <div class="project-description">
+                    <p>A clean, functional dashboard demonstrating core Excel visualization and analysis skills. Perfect example of how simple tools can deliver powerful insights when properly structured.</p>
+                    
+                    <div class="key-features">
+                        <h3>Dashboard Features</h3>
+                        <ul>
+                            <li>Pivot tables for data summarization</li>
+                            <li>Charts and graphs for visual analysis</li>
+                            <li>Slicers for interactive filtering</li>
+                            <li>KPI cards highlighting key metrics</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="project-images">
+                    <div class="image-wrapper">
+                        <img src="images/project-simple-dashboard.png" alt="Simple Excel Dashboard">
+                        <div class="image-caption">Overview of key metrics and trends</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
