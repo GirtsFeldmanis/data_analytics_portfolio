@@ -20,12 +20,20 @@
         /* HERO SECTION */
         .hero {
             min-height: 100vh;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+            display: flex;
             align-items: center;
+            justify-content: center;
             padding: 60px 80px;
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 60px;
+            align-items: center;
         }
 
         .hero-content {
